@@ -93,7 +93,7 @@ export function UserManagement() {
   };
 
   const getUserTaskStats = (userId: string) => {
-    const userTasks = tasks.filter(task => task.assigneeIds?.includes(userId) || task.assigneeId === userId);
+    const userTasks = tasks.filter(task => task.assigneeIds?.includes(userId));
     return {
       completed: userTasks.filter(task => task.status === 'completed').length,
       inProgress: userTasks.filter(task => task.status === 'in-progress').length,
@@ -305,18 +305,16 @@ export function UserManagement() {
           </span>
         </div>
         
-      
-          {currentUser?.role === 'admin' && (
-            <button
-              onClick={() => setShowAddUser(true)}
-              className="flex items-center space-x-2 text-gray-800 px-4 py-2 rounded-xl font-medium uppercase"
-              style={{ backgroundColor: '#CFE8FF' }}
-            
-              <UserPlus className="w-5 h-5" />
-              <span>ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ</span>
-            </button>
-          )}
-        </div>
+        {currentUser?.role === 'admin' && (
+          <button
+            onClick={() => setShowAddUser(true)}
+            className="flex items-center space-x-2 text-gray-800 px-4 py-2 rounded-xl font-medium uppercase"
+            style={{ backgroundColor: '#CFE8FF' }}
+          >
+            <UserPlus className="w-5 h-5" />
+            <span>ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ</span>
+          </button>
+        )}
       </div>
 
       {/* Форма добавления/редактирования пользователя */}
